@@ -2,27 +2,26 @@
     include "./connection.php";
     
     
-    function pegar_cliente($conn, $id) {
-        $novo_cliente = null;
-        $resposta = $conn->query("SELECT * FROM cliente WHERE id = '$id'");
+    function pegar_chamado($conn, $id) {
+        $novo_chamado = null;
+        $resposta = $conn->query("SELECT * FROM chamado WHERE id = '$id'");
         if ($resposta->num_rows > 0) {
-            $novo_cliente = $resposta->fetch_assoc();
+            $novo_chamado = $resposta->fetch_assoc();
         }
 
-        return $novo_cliente;
+        return $novo_chamado;
     }
 
     $user = null;
     if (isset($_GET['id'])) {
         $id = (int) $_GET['id'];
-        $cliente = pegar_cliente($conn, $id);
+        $chamado = pegar_chamado($conn, $id);
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            if (isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['telefone'])) {
-                $nome = $_POST['nome'];
-                $email = $_POST['email'];
-                $telefone = $_POST['telefone'];
-                $conn->query("UPDATE cliente SET nome = '$nome', email = '$email, telefone = '$telefone' WHERE id = '$id'");
+            if (isset($_POST['id_colaborador']) && isset($_POST['status'])) {
+                $id_colaborador = $_POST['id_colaborador'];
+                $status = $_POST['status'];
+                $conn->query("UPDATE chamado SET id_colaborador = '$id_colaborador', status = '$status' WHERE id = '$id'");
                 
             }
         }
@@ -38,17 +37,14 @@
     <title>Update</title>
 </head>
 <body>
-    <?php if ($cliente == null): ?>
-        <h1>Cliente invalido </h1>    
+    <?php if ($chamado == null): ?>
+        <h1>Chamado invalido </h1>    
     <?php else: ?>
-        <form method="POST">
-        <label for="name">Nome:</label>
-        <input type="text" id="nome" name="nome" required>
-        <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email" required>
-        <label for="telefone">Telefone:</label>
-        <input type="tel" id="telefone" name="telefone" required>
-        <button type="submit">Enviar</button>
+        <label for="status">Status:</label>
+        <input type="text" id="status" name="status" required>
+        <label for="id_colaborador">Id do Colaborador:</label>
+        <input type="text" id="id_colaborador" name="id_colaborador" required>
+        <button type="submit">Atualizar</button>
     </form>
     <?php endif ?>
 </body>

@@ -22,7 +22,7 @@
                 $nome = $_POST['nome'];
                 $email = $_POST['email'];
                 $telefone = $_POST['telefone'];
-                $conn->query("UPDATE cliente SET nome = '$nome', email = '$email, telefone = '$telefone' WHERE id = '$id'");
+                $conn->query("UPDATE cliente SET nome = '$nome', email = '$email', telefone = '$telefone' WHERE id = '$id'");
                 
             }
         }
@@ -48,7 +48,7 @@
         <input type="email" id="email" name="email" required>
         <label for="telefone">Telefone:</label>
         <input type="tel" id="telefone" name="telefone" required>
-        <button type="submit">Enviar</button>
+        <button type="submit">Atualizar</button>
     </form>
     <?php endif ?>
 </body>

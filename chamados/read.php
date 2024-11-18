@@ -1,6 +1,6 @@
 <?php
     include "../db.php";
-    $resposta = $conn->query("SELECT * FROM chamado");
+    $resposta = $conn->query("SELECT * FROM chamado ORDER BY criticidade AND status;");
     $chamados = array();
 
     while($row = $resposta->fetch_assoc()) {
