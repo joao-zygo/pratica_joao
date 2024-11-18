@@ -1,7 +1,7 @@
 <?php
     include "../db.php";
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-        if (isset($_POST['nome']) && isset($_POST['email'])) {
+        if (isset($_POST['nome']) && isset($_POST['email']) && isset($_POST['telefone'])) {
             $nome = $_POST['nome'];
             $email = $_POST['email'];
             $telefone = $_POST['telefone'];
