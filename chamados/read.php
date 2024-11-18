@@ -1,10 +1,10 @@
 <?php
     include "../db.php";
-    $resposta = $conn->query("SELECT * FROM cliente");
-    $clientes = array();
+    $resposta = $conn->query("SELECT * FROM chamado");
+    $chamados = array();
 
     while($row = $resposta->fetch_assoc()) {
-        array_push($clientes, $row);
+        array_push($chamados, $row);
     }
 
     $conn->close();
@@ -17,12 +17,15 @@
     <title>Read</title>
 </head>
 <body>
-    <?php foreach ($clientes as $cliente): ?>
+    <?php foreach ($chamados as $chamado): ?>
     <div>
-        <p>Nome: <?= $cliente["name"]?> </p>
-        <p>Email: <?= $cliente["email"]?> </p>
-        <p>Telefone: <?= $cliente["telefone"]?> </p>
-        <a href="update.php?id=<?= $cliente["id"]?>">Alterar</a>
+        <p>Id do Cliente: <?= $chamado["cliente_id"]?> </p>
+        <p>Descrição: <?= $chamado["descricao"]?> </p>
+        <p>Criticidade: <?= $chamado["criticidade"]?> </p>
+        <p>Status: <?= $chamado["status"]?></p>
+        <p>Data da Abertura: <?= $chamado["data_abertura"]?> </p>
+        <p>Id do Colaborador: <?= $chamado["id_colaborador"]?></p>
+        <a href="update.php?id=<?= $chamado["id"]?>">Alterar</a>
     </div>
     <hr>
     <?php endforeach ?>
